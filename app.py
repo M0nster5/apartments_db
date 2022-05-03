@@ -15,7 +15,7 @@ from flask_login import UserMixin, LoginManager, login_user, login_required, log
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:terril@localhost/apartments'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:password@localhost/apartments'
 db = SQLAlchemy(app)
 
 app.config.update(dict(
