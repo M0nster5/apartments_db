@@ -1,0 +1,64 @@
+{% extends "home_base.html" %}
+
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+<div class="page-header">
+      <h1>Lease
+          <a href="/lease-add" class="btn btn-success" style="float: right">Add</a>
+
+      </h1>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-danger alert-dismissible">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close" style="font-size: xx-large">&times;</a>
+              <p class="lead">{{ message }}</p>
+            </div>
+          {% endfor %}
+            <ul></ul>
+        {% endif %}
+      {% endwith %}
+    </div>
+    <hr>
+<div class="table">
+      <table class="table table-striped" id="table">
+        <thead>
+        <tr>
+          <th>Signer</th>
+          <th>Monthly Amount</th>
+          <th>Expires On</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for lease in leases %}
+          <tr>
+            <td>{{ lease[0] }}</td>
+            <td>{{ lease[1] }}</td>
+            <td>{{ lease[2] }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      $('#table').DataTable({
+        "order": [[1, 'asc']],
+        stateSave: true
+      });
+    });
+  </script>
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script type="text/javascript" charset="utf8"
+          src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+{% endblock %}
